@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
     case SIGN_UP:
       const response = payload ? payload.data : null;
       const account = response ? response.data : null;
-      const metadata = payload ? response.metadata : null;
+      const metadata = response ? response.metadata : null;
 
       const token = metadata ? metadata.token : null;
       const refreshToken = metadata ? metadata.refreshToken : null;
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
       if (token) setToken(token);
       if (refreshToken) setRefreshToken(refreshToken);
 
-      return { ...initialState, account }
+      return { ...initialState, account };
     default:
       return state;
   }

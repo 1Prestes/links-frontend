@@ -16,17 +16,17 @@ const App = () => {
           <ul className="list-group list-group-horizontal">
             <li className="list-group-item"><Link to="/sign-in">Sign in</Link></li>
             <li className="list-group-item"><Link to="/sign-up">Sign up</Link></li>
-            <li className="list-group-item"><Link to="/menage/links/create">Create link</Link></li>
-            <li className="list-group-item"><Link to="/menage/links/edit">Edit link</Link></li>
-            <li className="list-group-item"><Link to="/menage/links">Links</Link></li>
+            <li className="list-group-item"><Link to="/manage/links/create">Create link</Link></li>
+            <li className="list-group-item"><Link to="/manage/links/edit">Edit link</Link></li>
+            <li className="list-group-item"><Link to="/manage/links">Links</Link></li>
           </ul>
         </nav>
         <Switch>
           <Route path="/sign-in"><SignIn /></Route>
           <Route path="/sign-up"><SignUp /></Route>
-          <Route path="/menage/links/create"><ManageLinksCreate /></Route>
-          <Route path="/menage/links/edit"><ManageLinksEdit /></Route>
-          <Route path="/menage/links"><ManageLinks /></Route>
+          <Route path="/manage/links/create"><ManageLinksCreate /></Route>
+          <Route path="/manage/links/edit"><ManageLinksEdit /></Route>
+          <Route path="/manage/links"><ManageLinks /></Route>
           <Route path="/"><Home /></Route>
         </Switch>
       </div>

@@ -5,6 +5,7 @@ import { signUp } from './SignUpActions';
 
 const SignUp = (props) => {
   const { signUp, account } = props;
+
   const submitHandler = e => {
     e.preventDefault();
 
@@ -16,7 +17,7 @@ const SignUp = (props) => {
   };
 
   if(account) {
-    return <Redirect to="/menage/links" />;
+    return <Redirect to="/manage/links" />;
   }
 
   return (
