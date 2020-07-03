@@ -1,6 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { signOut } from '../../../actions/AccountActions';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, signOut }) => {
+  const signOutHandler = e => {
+    e.preventDefault();
+    signOut();
+  };
+
   return (
     <div className="layout">
       <nav className="navbar navbar-expand-lg bg-primary text-light">
@@ -12,13 +19,17 @@ const Layout = ({ children }) => {
             <strong>Links</strong>
           </div>
           <div>
-            <span>Exit</span>
+            <button onClick={signOutHandler}>Exit</button>
           </div>
         </div>
       </nav>
       <div className="container">{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout;
+const mapStateToProps = (state) => {
+  return { account: state.account.account };
+};
+
+export default connect(mapStateToProps, { signOut })(Layout);
