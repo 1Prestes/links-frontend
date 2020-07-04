@@ -8,17 +8,25 @@ export const getApiUrl = path => {
 export const getHeaders = () => {
   const token = getToken();
   if (!token) return {};
-  console.log('tooken', token);
   return {
     Authorization: `Bearer ${token}`,
   };
 }
 
-export const apiPost = (path, data) => {
+export const apiPost = (path, data = {}) => {
   const url = getApiUrl(path);
   const options = {
     headers: getHeaders(),
   };
 
   return axios.post(url, data, options);
+}
+
+export const apiGet = (path) => {
+  const url = getApiUrl(path);
+  const options = {
+    headers: getHeaders(),
+  };
+
+  return axios.get(url, options);
 }

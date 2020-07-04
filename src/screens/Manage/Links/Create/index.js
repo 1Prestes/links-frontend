@@ -10,8 +10,7 @@ const Create = ({ link, linkCreate }) => {
   const submitHandler = e => {
     e.preventDefault();
     const data = getFormData(e);
-    linkCreate(data);
-    console.log('aaasda ', data)
+    return linkCreate(data);
   }
 
   if (link) {
@@ -40,7 +39,7 @@ const Create = ({ link, linkCreate }) => {
             </label>
           </div>
           <div>
-            <button className="btn btn-primary btn-round">Login</button>
+            <button className="btn btn-primary btn-round">Create</button>
           </div>
         </form>
 

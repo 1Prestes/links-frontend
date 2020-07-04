@@ -25,7 +25,7 @@ const Edit = () => {
             </label>
           </div>
           <div>
-            <button type="submit" className="btn btn-primary btn-round">Login</button>
+            <button className="btn btn-primary btn-round">Edit</button>
           </div>
         </form>
 
