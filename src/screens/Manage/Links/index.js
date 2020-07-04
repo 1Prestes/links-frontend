@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Layout from "../../Layouts/Manage";
-import { linkList, setLinkToRemove } from "../../../actions/LinkActions";
+import { linkList, setLinkToRemove, linkRemove } from "../../../actions/LinkActions";
 
-const Links = ({ links, linkList, linkToRemove, setLinkToRemove }) => {
+const Links = ({ links, linkRemove, linkList, linkToRemove, setLinkToRemove }) => {
   useEffect(() => {
     linkList();
   }, [linkList]);
+
+  const cancelDelete = e => setLinkToRemove(null);
+  const confirmDelete = e => linkToRemove ? linkRemove(linkToRemove) : null;
 
   return (
     <Layout>
@@ -27,8 +30,8 @@ const Links = ({ links, linkList, linkToRemove, setLinkToRemove }) => {
         ? links.map((link) => {
 
           const deleteClick = (e) => setLinkToRemove(link);
-          const border = (linkToRemove && linkToRemove.id === link.id) ? 
-          'border border-danger rounded' : 'border border-transparent';
+          const border = (linkToRemove && linkToRemove.id === link.id) ?
+            'border border-danger rounded' : 'border border-transparent';
 
           return (
             <div
@@ -48,8 +51,19 @@ const Links = ({ links, linkList, linkToRemove, setLinkToRemove }) => {
               </div>
             </div>
           );
-        })
-        : null}
+        }) : null}
+
+        {linkToRemove ? (
+          <div className="alert alert-danger rounded float-center shadow-bold">
+            <h4 className="alert-heading">Delete confirmation!</h4>
+            <p>Are you sure you want to delete, this action cannot be undone.</p>
+            <hr />
+            <div className="d-flex justify-content-between">
+              <button className="btn btn-ouline-light" onClick={cancelDelete}>cancel</button>
+              <button className="btn btn-danger" onClick={confirmDelete}>delete</button>
+            </div>
+          </div>
+        ) : null }
     </Layout>
   );
 };
@@ -61,4 +75,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { linkList, setLinkToRemove })(Links);
+export default connect(mapStateToProps, { linkList, setLinkToRemove, linkRemove })(Links);
