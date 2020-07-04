@@ -1,21 +1,36 @@
 import React from "react";
-
+import { Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
 import Layout from '../../../Layouts/Manage';
+import { getFormData } from '../../../../helpers/form';
+import { linkCreate } from '../../../../actions/LinkActions';
 
-const Create = () => {
+const Create = ({ link, linkCreate }) => {
+
+  const submitHandler = e => {
+    e.preventDefault();
+    const data = getFormData(e);
+    linkCreate(data);
+    console.log('aaasda ', data)
+  }
+
+  if (link) {
+    return <Redirect to="/manage/links" />;
+  }
+
   return (
     <Layout>
       <h1>Create Link</h1>
       <div>
 
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="form-group">
             <label>Label</label>
-            <input type="text" className="form-control" placeholder="Label" />
+            <input type="text" className="form-control" name="label" placeholder="Label" />
           </div>
           <div className="form-group">
             <label>Url</label>
-            <input type="text" className="form-control" placeholder="Url" />
+            <input type="text" className="form-control" name="url" placeholder="Url" />
           </div>
           <div className="form-group form-check">
             <label className="form-check-label">
@@ -25,7 +40,7 @@ const Create = () => {
             </label>
           </div>
           <div>
-            <button type="submit" className="btn btn-primary btn-round">Login</button>
+            <button className="btn btn-primary btn-round">Login</button>
           </div>
         </form>
 
@@ -34,4 +49,8 @@ const Create = () => {
   );
 };
 
-export default Create;
+const mapStateToProps = state => {
+  return { link: state.link.link };
+}
+
+export default connect(mapStateToProps, { linkCreate })(Create);

@@ -2,25 +2,20 @@ import React from "react";
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signIn } from '../../actions/AccountActions';
+import { getFormData } from '../../helpers/form';
 
 const SignIn = (props) => {
   const { account, signIn } = props;
 
-  if(account) {
+  if (account) {
     return <Redirect to="/manage/links" />;
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    const formData = new FormData(e.target);
-
-    const data = Object.fromEntries(formData);
-
+    const data = getFormData(e);
     signIn(data);
   }
-
-  console.log('### SignIn.account', account);
 
   return (
     <div className="container h-100 pt-5">
