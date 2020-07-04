@@ -1,0 +1,34 @@
+import React, { useState, useEffect } from "react";
+
+const FormCheck = ({ data, name, label }) => {
+  const [isChecked, setChecked] = useState(null);
+
+  useEffect(() => {
+    const initialValue = data && data[name] ? data[name] : undefined;
+    if (initialValue !== undefined) setChecked(!!initialValue);
+  }, [name, data])
+
+  const handleChange = (e) => {
+    if (isChecked === e.target.checked) return;
+    setChecked(!!e.target.checked);
+  };
+
+  const inputProps = {
+    type: 'checkbox',
+    name,
+    checked: !!isChecked,
+    onChange: handleChange,
+  };
+
+  return (
+    <div className="form-group form-check">
+      <label className="form-check-label">
+        <input {...inputProps} />
+        <span className="form-check-sign"></span>
+        {label}
+      </label>
+    </div>
+  );
+};
+
+export default FormCheck;
