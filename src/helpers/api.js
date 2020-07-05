@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getToken } from './account';
+import { secondsToReadableTime } from './dateTime';
+import { getTokenExpire } from './jwt';
 
 export const getApiUrl = path => {
   return `http://localhost:3001${path}`;
@@ -8,6 +10,13 @@ export const getApiUrl = path => {
 export const getHeaders = () => {
   const token = getToken();
   if (!token) return {};
+
+  const expires = getTokenExpire(token);
+  const secondsToExpire = expires - Date.now() / 1000;
+  const readableTime = secondsToReadableTime(secondsToExpire);
+
+  console.log('*** getHeaders.secondsToExpire', readableTime);
+
   return {
     Authorization: `Bearer ${token}`,
   };
